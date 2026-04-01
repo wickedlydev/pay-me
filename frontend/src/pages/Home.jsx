@@ -38,7 +38,7 @@ const Home = () => {
       </main>
       <footer className="w-full bg-white py-4 flex justify-center items-center shadow-inner">
         <div className="text-sm text-gray-500">
-          © 2024 Paytm Clone App. All rights reserved.
+          © 2026 Paytm Clone App. All rights reserved.
         </div>
       </footer>
     </div>
