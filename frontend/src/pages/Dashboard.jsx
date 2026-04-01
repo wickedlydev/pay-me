@@ -1,30 +1,31 @@
-import { Appbar } from "../component/Appbar"
-import { Users } from "../component/User"
-import { Balance } from "../component/Balance"
-import axios from "axios"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
+import Appbar from "../components/Appbar";
+import Balance from "../components/Balance";
+import { useRecoilValue } from "recoil";
+import { tokenAtom, userAtom } from "../store/atoms";
+import { getBalance } from "../services/operations/transactionApi";
+import { Users } from "../components/Users";
 
+const Dashboard = () => {
+  const [balance, setBalance] = useState("");
+  const token = useRecoilValue(tokenAtom);
+  const user = useRecoilValue(userAtom);
 
-export const Dashboard = () => {
-    const[balance,setbalance]=useState(0)
-    useEffect(()=>{
-        axios.get("https://paytm-clone-nu.vercel.app/api/v1/account/balance",{
-            headers:{
-                Authorization: "Bearer " + localStorage.getItem("token")
-            }
-        })
-        .then(response =>{
-            setbalance(response.data.balance)
-        })
-        .catch(err=>{
-            console.error("Error fetching balance:", err);
-        })
-    },[])
-    return <div>
-        <Appbar />
-        <div className="m-8">
-            <Balance value={balance.toLocaleString()} />
-            <Users />
-        </div>
+  useEffect(() => {
+    const fetchBalance = async () => {
+      const userBalance = await getBalance(token);
+      setBalance(userBalance);
+    };
+    fetchBalance();
+  }, [token]);
+
+  return (
+    <div>
+      <Appbar user={user.firstname} />
+      <Balance balance={balance} />
+      <Users />
     </div>
-}
+  );
+};
+
+export default Dashboard;

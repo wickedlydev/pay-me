@@ -1,75 +1,101 @@
-import { Button } from "../component/Button";
-import { Bottomwarning } from "../component/Bottom"
-import {Heading} from "../component/Heading"
-import { SubHeading } from "../component/Subheading"
-import { Inputbox } from "../component/Input"
-import { useState } from "react";
-import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
-export const Signup = () =>{
-    const[firstname,setFirstname]= useState("")
-    const[lastname,setlastname]=useState("")
-    const[username,setusername]=useState("")
-    const[password,setpassword]=useState("")
-    const [message, setMessage] = useState("")
-    const navigate = useNavigate()
-    return (
-        <div className="bg-slate-300 h-screen flex justify-center">
-            <div className="flex flex-col justify-center">
-                <div className="rounded-lg bg-white w-80 text-center p-2 h-max px-4">
-        <Heading label={"Sign up"} />
-        <SubHeading label={"Enter your infromation to create an account"} />
-        <Inputbox onChange = {(e)=>{
-            setFirstname(e.target.value)
-        }} placeholder="Enter your name" label={"First Name"} />
-        <Inputbox  onChange = {(e)=>{
-            setlastname(e.target.value)
-        }}placeholder="Enter your surname" label={"Last Name"} />
-        <Inputbox onChange = {(e)=>{
-            setusername(e.target.value)
-        }} placeholder="enter your gmail" label={"Email"} />
-        <Inputbox onChange ={(e)=>{
-            setpassword(e.target.value)
-        }} placeholder="enter any password " 
-        type="password"
-        label={"Password"} />
-        <div className="pt-4">
-          <Button  onClick = {async()=>{
-            try{
-                if (!username || !firstname || !lastname || !password) {
-                setMessage("All fields are required");
-                return;
-        }
-            const response = await axios.post("https://paytm-clone-nu.vercel.app/api/v1/user/signup",{
-                 username,
-                 firstname,
-                 lastname,
-                 password
-            });
-            localStorage.setItem("token",response.data.token)
-            setMessage("signup successful");
-            setTimeout(() => navigate("/dashboard"), 1000);
-            }catch(err){
-                console.log(err)
-                const errorMsg = err.response?.data?.message || "signup failed";
-                 console.error("Signup Error:", err.response?.data);
-                setMessage(errorMsg);
-                
-            }
-          }}label={"Sign up"} />
-        </div>
-        {message && (
-                <div className={`text-sm font-semibold p-2 rounded mt-4 text-center ${
-                    message.includes("successful") 
-                    ? "bg-green-100 text-green-700" 
-                    : "bg-red-100 text-red-700"
-                }`}>
-                    {message}
-                </div>
-            )}
-        <Bottomwarning label={"Already have an account?"} buttonText={"Sign in"} to={"/signin"} />
-      </div>
+import React, { useState } from "react";
+import Heading from "../components/Heading";
+import SubHeading from "../components/SubHeading";
+import InputBox from "../components/InputBox";
+import Button from "../components/Button";
+import BottomWarning from "../components/BottomWarning";
+import { signup } from "../services/operations/authApi";
+import { useNavigate } from "react-router-dom";
+
+const Signup = () => {
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+  });
+
+  const [showError, setShowError] = useState(false);
+
+  const navigate = useNavigate();
+
+  function changeHandler(event) {
+    setFormData((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
+  }
+
+  async function hanldeClick(event) {
+    event.preventDefault();
+    const response = await signup(
+      formData.firstname,
+      formData.lastname,
+      formData.email,
+      formData.password
+    );
+    if (response === "User created successfully") {
+      setFormData({
+        firstname: "",
+        lastname: "",
+        email: "",
+        password: "",
+      });
+      setShowError(false);
+      navigate("/signin");
+    } else {
+      setShowError(true);
+    }
+  }
+  return (
+    <div className="bg-slate-300 h-screen flex justify-center items-center">
+      <div className="bg-white rounded-lg w-[80%] sm:w-[50%] lg:w-[23%] text-center p-3">
+        <div className="flex flex-col">
+          <Heading label={"Sign Up"} />
+          <SubHeading label={"Enter your information to create an account"} />
+          <InputBox
+            label={"First Name"}
+            placeholder={"John"}
+            name={"firstname"}
+            value={formData.firstname}
+            onChange={changeHandler}
+          />
+          <InputBox
+            label={"Last Name"}
+            placeholder={"Doe"}
+            name={"lastname"}
+            value={formData.lastname}
+            onChange={changeHandler}
+          />
+          <InputBox
+            label={"Email"}
+            placeholder={"johndoe@example.com"}
+            name={"email"}
+            value={formData.email}
+            onChange={changeHandler}
+          />
+          <InputBox
+            label={"Password"}
+            placeholder={"123456"}
+            name={"password"}
+            value={formData.password}
+            onChange={changeHandler}
+          />
+          <Button label={"Sign up"} onClick={hanldeClick} />
+          <BottomWarning
+            label={"Already have an account? "}
+            to={"/signin"}
+            buttonText={"Sign in"}
+          />
+          {showError && (
+            <div className="font-light text-red-700 text-xs mt-2">
+              Signup Failed!
             </div>
+          )}
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
+
+export default Signup;
