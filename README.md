@@ -17,8 +17,11 @@ A functional digital wallet application where users can securely sign up, manage
 ## Tech Stack
 
 •Frontend: React.js, Tailwind CSS (for styling), Axios (for API calls).
+
 •Backend: Node.js, Express.js.
+
 •Database: MongoDB with Mongoose (modeling and transactions).
+
 •Security: JSON Web Tokens (JWT) for session management and Zod for input validation.
 
 
