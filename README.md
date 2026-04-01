@@ -17,11 +17,8 @@ A functional digital wallet application where users can securely sign up, manage
 ## Tech Stack
 
 •Frontend: React.js, Tailwind CSS (for styling), Axios (for API calls).
-
 •Backend: Node.js, Express.js.
-
 •Database: MongoDB with Mongoose (modeling and transactions).
-
 •Security: JSON Web Tokens (JWT) for session management and Zod for input validation.
 
 
@@ -30,7 +27,6 @@ A functional digital wallet application where users can securely sign up, manage
 ### Prerequisites
 
 •Node.js (v16 or higher)
-
 •MongoDB Atlas account or local MongoDB instance
 
 ### Installation
@@ -82,18 +78,14 @@ await Account.create({
 ```
 #### Secure Transactions
 To ensure money is never "lost" during a transfer, the app uses MongoDB Transactions. This ensures that if the deduction from the sender fails, the credit to the receiver is never executed (and vice-versa).
-## 🗺️ Roadmap (Future Enhancements)
+## Roadmap (Future Enhancements)
 
 •[ ] Payment Gateway Integration: Connect with Razorpay or Stripe to add real money to the wallet.
-
 •[ ] Transaction History: A dedicated page to view all past debits and credits.
-
 •[ ] Profile Management: Allow users to update their details and upload profile pictures.
-
 •[ ] Input Verification: Better error handling and toast notifications for failed transactions.
-
 •[ ] QR Code Scanning: Generate and scan QR codes for even faster payments.
-## 📄 License
+## License
 
 Distributed under the MIT License. See LICENSE for more information.
 
@@ -102,6 +94,6 @@ Distributed under the MIT License. See LICENSE for more information.
 
 ## Contact
 
-Yash Sharma - <https://x.com/buildwithyash>-    <yashsharmaofficially@gmail.com>
+Dev Sharma - <https://x.com/wickedlydev>-    <dev.sharma.bis@gmail.com>
 
-Project Link: <https://github.com/yashsharmaofficially/paytm-clone>
+Project Link: <https://github.com/wickedlydev/pay-me>
