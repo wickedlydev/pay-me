@@ -84,9 +84,13 @@ To ensure money is never "lost" during a transfer, the app uses MongoDB Transact
 ## Roadmap (Future Enhancements)
 
 •[ ] Payment Gateway Integration: Connect with Razorpay or Stripe to add real money to the wallet.
+
 •[ ] Transaction History: A dedicated page to view all past debits and credits.
+
 •[ ] Profile Management: Allow users to update their details and upload profile pictures.
+
 •[ ] Input Verification: Better error handling and toast notifications for failed transactions.
+
 •[ ] QR Code Scanning: Generate and scan QR codes for even faster payments.
 ## License
 
