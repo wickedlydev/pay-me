@@ -1,24 +1,20 @@
 
-# 💰 Paytmm  Clone (Full-Stack)
+# Pay-Me
 
 A functional digital wallet application where users can securely sign up, manage a virtual wallet, and transfer funds to other users in real-time.
 
 **Live Demo:** [paytm-clone-ten-bice.vercel.app](https://paytm-clone-ten-bice.vercel.app)
 
 
-## 🚀 Features
+## Features
 
 •User Authentication: Secure Sign Up and Sign In functionality using JWT.
-
-• Dashboard: View your current wallet balance and search for other registered users.
-
+•Dashboard: View your current wallet balance and search for other registered users.
 •Peer-to-Peer Transfers: Send money to any user instantly using an atomic transaction system.
-
 •Real-time Search: Filter through the user database to find recipients easily.
-
 •Dynamic Balancing: Currently, new accounts are initialized with a random balance (using Math.random()) to simulate an existing account state.
 
-## 🛠️Tech Stack
+## Tech Stack
 
 •Frontend: React.js, Tailwind CSS (for styling), Axios (for API calls).
 
@@ -29,7 +25,7 @@ A functional digital wallet application where users can securely sign up, manage
 •Security: JSON Web Tokens (JWT) for session management and Zod for input validation.
 
 
-## 🏁 Getting Started
+## Getting Started
 
 ### Prerequisites
 
