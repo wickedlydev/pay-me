@@ -1,6 +1,6 @@
 # Paytm-Clone App Backend
 
-This is the backend server for the Paytm-clone App. It provides various API endpoints for account management, user authentication, and user interactions. This project is built with Node.js and Express.
+This is the backend server for the Paytm-clone App. It provides various API endpoints for account management, user authentication, and user interactions. This project uses Node.js and Express.
 
 ## Getting Started
 
